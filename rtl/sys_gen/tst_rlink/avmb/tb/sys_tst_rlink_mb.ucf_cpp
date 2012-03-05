@@ -1,0 +1,18 @@
+## $Id$
+##
+## Revision History: 
+## Date         Rev Version  Comment
+## 2012-02-24   ???   1.0    Initial version
+##
+
+NET I_CLK40        LOC = V10 | IOSTANDARD = LVCMOS33;               # "USER_CLOCK"
+NET I_CLK40 TNM_NET = I_CLK40;
+TIMESPEC TS_I_CLK40 = PERIOD USER_CLOCK 40000 kHz;
+
+## std board
+##
+#include "bplib/avmb/avmb_pins.ucf"
+##
+## Pmod 2 - RS232 
+##
+#include "bplib/avmb/avmb_pins_pm2_rs232.ucf"

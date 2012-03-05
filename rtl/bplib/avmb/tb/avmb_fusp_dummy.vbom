@@ -1,0 +1,5 @@
+# libs
+../../../vlib/slvtypes.vhd
+# components
+# design
+avmb_fusp_dummy.vhd

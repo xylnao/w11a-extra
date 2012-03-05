@@ -1,0 +1,13 @@
+## $Id$
+##
+## Revision History: 
+## Date         Rev Version  Comment
+## 2012-02-23   ???   1.0    Initial version
+##
+## Pmod connector 2 top / usage RS232 for FTDI USB serport -------------------
+## in bank 0
+##
+NET "O_FUSP_RTS_N" LOC = "h12"   | IOSTANDARD=LVCMOS33 | DRIVE=4 | SLEW=SLOW;
+NET "I_FUSP_CTS_N" LOC = "g13"   | IOSTANDARD=LVCMOS33 | PULLDOWN;
+NET "I_FUSP_RXD"   LOC = "e16"   | IOSTANDARD=LVCMOS33 | PULLUP;
+NET "O_FUSP_TXD"   LOC = "e18"   | IOSTANDARD=LVCMOS33 | DRIVE=4 | SLEW=SLOW;

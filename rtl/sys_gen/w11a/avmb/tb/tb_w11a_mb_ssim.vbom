@@ -1,0 +1,7 @@
+# configure for _*sim case
+# Note: this tb uses sys_w11a_mb.vbom in local directory
+#       (not in .. as usual) to allow a tb specific configure !!!
+avmb_fusp_aif = sys_w11a_mb_ssim.vhd
+tb_w11a_mb.vbom
+@top:tb_w11a_mb
+

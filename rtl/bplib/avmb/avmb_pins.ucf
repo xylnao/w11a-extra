@@ -1,0 +1,39 @@
+## $Id$
+##
+## Pin locks for Avnet MicroBoard core functionality
+##  - USB UART
+##  - human I/O (switches, buttons, leds)
+##
+## Revision History: 
+## Date         Rev Version  Comment
+## 2012-02-24   ???   1.0    Initial version
+##
+## clocks -- in bank 2 -------------------------------------------------------
+NET "I_CLK40"   LOC = "v10"  | IOSTANDARD=LVCMOS33;
+##
+## USB UART Interface -- in bank 2--------------------------------------------
+##   I_RXD   -> signal MCU_RX -> TXD pin of CP2102
+##   O_TXD   -> signal MCU_TX -> RXD pin of CP2102
+##   I_CTS_N ?? signal RTS    -> RTS pin of CP2102 (only on J3)
+##   O_RTS_N ?? signal CTS    -> CTS pin of CP2102 (only on J3) 
+NET "I_RXD"     LOC = "r7"  | IOSTANDARD=LVCMOS33;
+NET "O_TXD"     LOC = "t7"  | IOSTANDARD=LVCMOS33;
+##
+## switches -- in bank 0 -----------------------------------------------------
+NET "I_SWI<0>"  LOC = "b3"  | IOSTANDARD=LVCMOS33 | PULLDOWN;
+NET "I_SWI<1>"  LOC = "a3"  | IOSTANDARD=LVCMOS33 | PULLDOWN;
+NET "I_SWI<2>"  LOC = "b4"  | IOSTANDARD=LVCMOS33 | PULLDOWN;
+NET "I_SWI<3>"  LOC = "a4"  | IOSTANDARD=LVCMOS33 | PULLDOWN;
+##
+## buttons -- in bank 2-------------------------------------------------------
+##
+NET "I_BTN<0>"  LOC = "v4"  | IOSTANDARD=LVCMOS33;      # USER_RESET
+##
+## LEDs -- in bank 3 ---------------------------------------------------------
+## "Xilinx Spartan-6 FPGA LX9 MicroBoard User Guide RevB 09/27/2011"
+## from Avnet says these LEDs are in bank 2, but actually in bank 3.
+NET "O_LED<0>"  LOC = "p4"  | IOSTANDARD=LVCMOS18;      
+NET "O_LED<1>"  LOC = "l6"  | IOSTANDARD=LVCMOS18;
+NET "O_LED<2>"  LOC = "f5"  | IOSTANDARD=LVCMOS18;
+NET "O_LED<3>"  LOC = "c2"  | IOSTANDARD=LVCMOS18;
+##
