@@ -452,8 +452,8 @@ begin
     signal DOA1: slv(DWIDTH-1 downto 0) := (others=> '0');
     signal DOB0: slv(DWIDTH-1 downto 0) := (others=> '0');
     signal DOB1: slv(DWIDTH-1 downto 0) := (others=> '0');
-    signal SELA: slbit := '0';
-    signal SELB: slbit := '0';
+    signal OSELA: slbit := '0';
+    signal OSELB: slbit := '0';
     signal ENA0: slbit := '0';
     signal ENB0: slbit := '0';
     signal ENA1: slbit := '0';
@@ -462,6 +462,8 @@ begin
     signal WEB0: slbit := '0';
     signal WEA1: slbit := '0';
     signal WEB1: slbit := '0';
+    varible isela: slbit := '0';
+    varible iselb: slbit := '0';
   begin
     GL: for i in DWIDTH-1 downto 0 generate
       MEM0 : RAMB16_S1_S1
@@ -518,11 +520,7 @@ begin
     begin
       wait until rising_edge(CLKA);
       if ENA = '1' then
-        if ADDRA(AWIDTH - 1) = '0' then
-          SELA <= '0';
-        else
-          SELA <= '1';
-        end if;
+        OSELA <= ADDRA(AWIDTH - 1);
       end if;
     end process;
     
@@ -530,24 +528,23 @@ begin
     begin
       wait until rising_edge(CLKB);
       if ENB = '1' then
-        if ADDRB(AWIDTH - 1) = '0' then
-          SELB <= '0';
-        else
-          SELB <= '1';
-        end if;
+        OSELB <= ADDRB(AWIDTH - 1);
       end if;
     end process;
 
-    DOA <= DOA0 when SELA = '0' else DOA1;
-    DOB <= DOB0 when SELB = '0' else DOB1;
-    ENA0 <= ENA and not ADDRA(AWIDTH - 1);
-    ENB0 <= ENB and not ADDRB(AWIDTH - 1);
-    ENA1 <= ENA and ADDRA(AWIDTH - 1);
-    ENB1 <= ENB and ADDRB(AWIDTH - 1);
-    WEA0 <= WEA and not ADDRA(AWIDTH - 1);
-    WEB0 <= WEB and not ADDRB(AWIDTH - 1);
-    WEA1 <= WEA and ADDRA(AWIDTH - 1);
-    WEB1 <= WEB and ADDRB(AWIDTH - 1);
+    DOA <= DOA0 when OSELA = '0' else DOA1;
+    DOB <= DOB0 when OSELB = '0' else DOB1;
+
+    isela := ADDRA(AWIDTH - 1);
+    iselb := ADDRB(AWIDTH - 1);
+    ENA0 <= ENA and not isela;
+    ENB0 <= ENB and not iselb;
+    ENA1 <= ENA and isela;
+    ENB1 <= ENB and iselb;
+    WEA0 <= WEA and not isela;
+    WEB0 <= WEB and not iselb;
+    WEA1 <= WEA and isela;
+    WEB1 <= WEB and iselb;
 
 end generate AW_15_S1;
   
